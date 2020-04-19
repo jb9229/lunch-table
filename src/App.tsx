@@ -1,6 +1,7 @@
+import './App.css';
+
 import React from 'react';
 import logo from './logo.svg';
-import './App.css';
 
 function App() {
   return (
@@ -10,6 +11,10 @@ function App() {
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
+        <p># sprint HomeLayout: 사원 리스트</p>
+        <p>-> 사원 리스트 화면</p>
+        <p>-> 출근 버튼</p>
+        <p>-> 퇴근 버튼</p>
         <a
           className="App-link"
           href="https://reactjs.org"
