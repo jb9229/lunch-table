@@ -1,10 +1,15 @@
 import * as React from 'react';
 
 import styled from 'styled-components';
+import { useHoemDetilContext } from '../../context/HomeDetailContext';
 
 const Container = styled.div``;
 const CommandWrap = styled.div`border-width: 1;`;
-const EmployeeListWrap = styled.div`border-top-width: 1; border-color: black;`;
+const EmployeeListWrap = styled.div`
+    /* background-color: #333; */
+    overflow: auto;
+    white-space: nowrap;
+`;
 const SeperatorLine = styled.div`border-width: 1;`;
 const RestaurantWrap = styled.div`border-width: 1;`;
 const TableSettingWrap = styled.div`border-width: 1;`;
@@ -14,6 +19,8 @@ const TODOText = styled.p``;
 interface Props {
 }
 const HomeLayout: React.FC<Props> = (props): React.ReactElement => {
+  const { employeeList } = useHoemDetilContext();
+console.log('>>> employeeList: ', employeeList)
   return (
     <Container>
       <CommandWrap>
@@ -24,8 +31,7 @@ const HomeLayout: React.FC<Props> = (props): React.ReactElement => {
         <SelectRestaurantBut /> <DivideEmployeeEachTableBut /> */}
       </CommandWrap>
       <EmployeeListWrap>
-        <TODOText># EmployeeListWrap</TODOText>
-        <TODOText>퇴근 아이콘이 있는 사원</TODOText>
+        {employeeList.map((employee) => <TODOText>{employee.name}</TODOText>)}
       </EmployeeListWrap>
       <SeperatorLine />
       <RestaurantWrap>
