@@ -2,8 +2,9 @@ import { Employee } from '../container/home/types';
 import createCtx from '../context/CreateCtx';
 
 interface Context {
+  newEmployee: Employee;
   employeeList: Array<Employee>;
-  addEmployee: (name: string) => void;
+  addEmployee: (e: React.MouseEvent) => void;
   deleteEmployee: (name: string) => void;
 }
 

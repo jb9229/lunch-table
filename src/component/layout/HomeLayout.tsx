@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import AvatarEmployee from '../molecules/AvatarEmployee';
+import TextInput from '../molecules/TextInput';
 import styled from 'styled-components';
 import { useHoemDetilContext } from '../../context/HomeDetailContext';
 
@@ -13,13 +15,17 @@ const EmployeeListWrap = styled.div`
 const SeperatorLine = styled.div`border-width: 1;`;
 const RestaurantWrap = styled.div`border-width: 1;`;
 const TableSettingWrap = styled.div`border-width: 1;`;
-
+const EmployeeWrap = styled.span`
+  padding: 10px 10px;
+`;
+const AddEmployeeBtn = styled.button``;
+const AddEmployeeInput = styled(TextInput)``;
 const TODOText = styled.p``;
 
 interface Props {
 }
 const HomeLayout: React.FC<Props> = (props): React.ReactElement => {
-  const { employeeList } = useHoemDetilContext();
+  const { newEmployee, employeeList, addEmployee } = useHoemDetilContext();
 console.log('>>> employeeList: ', employeeList)
   return (
     <Container>
@@ -27,11 +33,17 @@ console.log('>>> employeeList: ', employeeList)
         <TODOText>사원명 입력필드, 출근버튼</TODOText>
         <TODOText>레스토랑 선택(테이블 수, 테이블당 최소인원), 자리에 앉기</TODOText>
         <TODOText>리셋, 리프레쉬, 등..</TODOText>
+        <AddEmployeeInput onChange={(name) => newEmployee.name = name} />
+        <AddEmployeeBtn onClick={addEmployee}>출근</AddEmployeeBtn>
         {/* <AddButton /> <DeleteButton />
         <SelectRestaurantBut /> <DivideEmployeeEachTableBut /> */}
       </CommandWrap>
       <EmployeeListWrap>
-        {employeeList.map((employee) => <TODOText>{employee.name}</TODOText>)}
+        {employeeList.map((employee, index) => (
+          <EmployeeWrap key={`key_${index}`}>
+            <AvatarEmployee employee={employee} onClickDelete={() => {}} />
+          </EmployeeWrap>))
+        }
       </EmployeeListWrap>
       <SeperatorLine />
       <RestaurantWrap>

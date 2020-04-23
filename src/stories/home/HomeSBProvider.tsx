@@ -12,16 +12,19 @@ interface Props {
 const HomeSBProvider = (props: Props): React.ReactElement => {
   const [employeeList, setEmployeeList] = React.useState([new Employee('jinbeom'),
     new Employee('jinhye'), new Employee('inhye')]);
+  const [newEmployee, setNewEmployee] = React.useState<Employee>(new Employee(''));
   // Define Action List
   const states = {
+    newEmployee,
     employeeList,
   };
   const actions = {
-    addEmployee: (name: string): void => {
-      const addEmployee = new Employee(name);
-      setEmployeeList(employeeList.concat(addEmployee));
+    addEmployee: (e: React.MouseEvent): void => {
+      e.preventDefault();
+      if (!newEmployee.name) {return}
+      setEmployeeList(employeeList.concat({ ...newEmployee }));
     },
-    deleteEmployee: (deleteName: string): void => {
+    deleteEmployee: (e: React.MouseEvent, deleteName: string): void => {
       setEmployeeList(employeeList.filter((employ) => deleteName !== employ.name));
     },
   };

@@ -21,6 +21,7 @@ const DeleteImgWrap = styled.div`
   left: 0;
   z-index: 999;
   background-color: red;
+  cursor: pointer;
 `;
 const DeleteImg = styled.img`
   width: 20px;
@@ -28,13 +29,14 @@ const DeleteImg = styled.img`
 
 interface Props {
   employee: Employee;
+  onClickDelete: (e: MouseEvent) => void;
 }
 const AvatarEmployee: React.FC<Props> = (props) => {
   return (
     <Container>
       <Image src={`${process.env.PUBLIC_URL}/assets/icons/person/Person-64.png`}/>
       <Name>{props.employee.name}</Name>
-      <DeleteImgWrap>
+      <DeleteImgWrap onClick={props.onClickDelete}>
         <DeleteImg src={`${process.env.PUBLIC_URL}/assets/icons/delete/Delete-256.png`}/>
       </DeleteImgWrap>
     </Container>
