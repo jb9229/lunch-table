@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import { addEmployee, deleteEmployee } from '../../container/home/action';
+
 import { Employee } from '../../container/home/types';
 import { Provider } from '../../context/HomeDetailContext';
 
@@ -19,13 +21,21 @@ const HomeSBProvider = (props: Props): React.ReactElement => {
     employeeList,
   };
   const actions = {
-    addEmployee: (e: React.MouseEvent): void => {
+    addEmployee: (e: React.MouseEvent): void =>
+    {
       e.preventDefault();
-      if (!newEmployee.name) {return}
-      setEmployeeList(employeeList.concat({ ...newEmployee }));
+
+      const newEmployeeList = addEmployee(newEmployee, employeeList);
+
+      setEmployeeList([...newEmployeeList]);
     },
-    deleteEmployee: (e: React.MouseEvent, deleteName: string): void => {
-      setEmployeeList(employeeList.filter((employ) => deleteName !== employ.name));
+    deleteEmployee: (e: React.MouseEvent, deleteName: string): void =>
+    {
+      e.preventDefault();
+
+      const newEmployeeList = deleteEmployee(deleteName, employeeList);
+
+      setEmployeeList([...newEmployeeList]);
     },
   };
 

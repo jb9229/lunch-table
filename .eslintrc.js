@@ -28,6 +28,9 @@ module.exports = {
     "require-jsdoc": 0,
     "indent": ["error", 2],
     "object-curly-spacing": ["error", "always", { "objectsInObjects": false }],
-    "max-len": ["error", { "code": 120 }]
+    "max-len": ["error", { "code": 120 }],
+    "valid-jsdoc": ["error", { "requireParamType": false, "requireReturnType": false }],
+    "brace-style": ["error", "allman", { "allowSingleLine": true }],
+    "block-spacing": "error"
   },
 };

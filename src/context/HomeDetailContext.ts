@@ -5,7 +5,7 @@ interface Context {
   newEmployee: Employee;
   employeeList: Array<Employee>;
   addEmployee: (e: React.MouseEvent) => void;
-  deleteEmployee: (name: string) => void;
+  deleteEmployee: (e: React.MouseEvent, name: string) => void;
 }
 
 const [useCtx, Provider] = createCtx<Context>();

@@ -18,7 +18,9 @@ interface InputProps {
 const TextInput:React.FC<InputProps> = (props) => {
   const [text, setText] = React.useState<string>('');
 
-  return (<Input value={text} onChange={(e) => {handleChange(e, setText); props.onChange(e.target.value)} } />);
+  return (<Input value={text} onChange={(e) => {
+    handleChange(e, setText); props.onChange(e.target.value);
+  } } />);
 };
 
 export default TextInput;
