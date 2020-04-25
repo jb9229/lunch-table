@@ -1,5 +1,5 @@
 import { Employee } from '../container/home/types';
-import createCtx from '../context/CreateCtx';
+import createCtx from './CreateCtx';
 
 interface Context {
   newEmployee: Employee;
