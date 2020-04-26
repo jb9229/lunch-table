@@ -6,8 +6,7 @@ const employeeSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
+  timestamp: {type: Number, default: Date.now},
 });
 
-const employee = mongoose.model('employee', employeeSchema);
-
-export default employee;
+module.exports = EmployeeSchema = mongoose.model('employee', employeeSchema);

@@ -3,21 +3,38 @@ const { ApolloServer, gql } = require('apollo-server-express');
 
 const mongoose = require('mongoose');
 
-// resolver dependance
+// mongoose schema
+const EmployeeSchema = require('./src/schemas/Employee');
+
 
 const typeDefs = gql`
   type Employee {
+    id: ID!
     name: String
+    timestamp: Float
   }
   type Query {
     hello: String
+    employees: [Employee]
+  }
+  type Mutation {
+    addEmployee(eName: String!): Employee
   }
 `;
 
 const resolvers = {
   Query: {
     hello: () => 'Hello world!',
+    employees: () => {
+      return EmployeeSchema.find({});
+    }
   },
+  Mutation: {
+    addEmployee: async(_, args) => {
+      const newEmployee = new EmployeeSchema({name: args.eName})
+      return await newEmployee.save();
+    }
+  }
 };
 
 const server = new ApolloServer({ typeDefs, resolvers });
