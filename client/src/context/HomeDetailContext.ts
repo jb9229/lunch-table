@@ -3,9 +3,9 @@ import createCtx from './CreateCtx';
 
 interface Context {
   newEmployee: Employee;
-  employeeList: Array<Employee>;
+  employeeList: Array<Employee> | undefined;
   addEmployee: (e: React.MouseEvent) => void;
-  deleteEmployee: (e: React.MouseEvent, name: string) => void;
+  deleteEmployee: (e: React.MouseEvent<HTMLDivElement>, name: string) => void;
 }
 
 const [useCtx, Provider] = createCtx<Context>();

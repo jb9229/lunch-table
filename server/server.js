@@ -43,13 +43,14 @@ const app = express();
 server.applyMiddleware({ app });
 
 app.listen({ port: 4000 }, () => {
-    mongoose.connect('mongodb+srv://publicUser:publicPassward21@jinbeomprivate-fahcz.gcp.mongodb.net/test?retryWrites=true&w=majority')
+    mongoose.connect('mongodb+srv://publicUser:publicPassward21@jinbeomprivate-fahcz.gcp.mongodb.net/test?retryWrites=true&w=majority',
+      { useNewUrlParser: true })
     .then(db => {
-      console.log('>>> mongoose connect success')
+      console.log('>>> mongo db connect success~~~')
       return db;
     })
     .catch(err => {
-      console.log('>>> mongoose connect fail!!!!')
+      console.log('>>> mongo db connect fail!!!')
       throw err;
     });;
     console.log('Now browse to http://localhost:4000' + server.graphqlPath)

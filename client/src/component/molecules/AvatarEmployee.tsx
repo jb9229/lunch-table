@@ -29,7 +29,7 @@ const DeleteImg = styled.img`
 
 interface Props {
   employee: Employee;
-  onClickDelete: (e: MouseEvent) => void;
+  onClickDelete: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 const AvatarEmployee: React.FC<Props> = (props) => {
   return (

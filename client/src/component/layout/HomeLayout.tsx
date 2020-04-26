@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import AvatarEmployee from '../molecules/AvatarEmployee';
+import Spinner from '../atoms/Spinner';
 import TextInput from '../molecules/TextInput';
 import styled from 'styled-components';
 import { useHoemDetilContext } from '../../context/HomeDetailContext';
@@ -37,11 +38,11 @@ const HomeLayout: React.FC<Props> = (props): React.ReactElement => {
         <SelectRestaurantBut /> <DivideEmployeeEachTableBut /> */}
       </CommandWrap>
       <EmployeeListWrap>
-        {employeeList.map((employee, index) => (
+        {employeeList ? (employeeList.map((employee, index) => (
           <EmployeeWrap key={`key_${index}`}>
             <AvatarEmployee employee={employee} onClickDelete={(e) => deleteEmployee(e, employee.name)} />
           </EmployeeWrap>))
-        }
+        ) : (<Spinner />)}
       </EmployeeListWrap>
       <SeperatorLine />
       <RestaurantWrap>
