@@ -6,7 +6,8 @@ import { storiesOf } from '@storybook/react';
 
 storiesOf('etc...', module)
   .add('homeLayout', () =>
-    React.createElement(() => {
+    React.createElement(() =>
+    {
       return (
         <HomeSBProvider>
           <HomeLayout />

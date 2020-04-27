@@ -21,7 +21,7 @@ const HomeProvider = (props: Props): React.ReactElement => {
 
     },
     onError(error) {
-
+      alert(`error: ${error.message}`)
     }
   });
 
@@ -38,6 +38,12 @@ const HomeProvider = (props: Props): React.ReactElement => {
     deleteEmployee: (e: React.MouseEvent<HTMLDivElement>, deleteName: string): void =>
     {
       e.preventDefault();
+    },
+    arrangeEmployee: (e: React.MouseEvent<HTMLDivElement>): void =>
+    {
+      e.preventDefault();
+      validateArrange();  // employ > 1, table > 2, min > 1, employ > table
+      arrangeEmployee();
     },
   };
 
