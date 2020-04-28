@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import { arrangeEmploy, arrangeEmployee } from './action';
+
 import { Employee } from './types';
 import { GET_EMPLOYEES } from '../../db/queries';
 import { Provider } from '../../context/HomeDetailContext';
@@ -14,6 +16,7 @@ interface Props {
 const HomeProvider = (props: Props): React.ReactElement => {
   // State valiables
   const [newEmployee, setNewEmployee] = React.useState<Employee>(new Employee(''));
+  const [arrangedEmployList, setArrangedEmployList] = React.useState<Array<Array<Employee>> | undefined>(undefined);
   
   // Server Datas
   const getEmployeesRes = useQuery(GET_EMPLOYEES, {
@@ -28,7 +31,8 @@ const HomeProvider = (props: Props): React.ReactElement => {
   // Define Action List
   const states = {
     newEmployee,
-    employeeList: getEmployeesRes.loading ? undefined : getEmployeesRes.data?.employees || []
+    employeeList: getEmployeesRes.loading ? undefined : getEmployeesRes.data?.employees || [],
+    arrangedEmployList
   };
   const actions = {
     addEmployee: (e: React.MouseEvent): void =>
@@ -39,11 +43,13 @@ const HomeProvider = (props: Props): React.ReactElement => {
     {
       e.preventDefault();
     },
-    arrangeEmployee: (e: React.MouseEvent<HTMLDivElement>): void =>
+    arrangeEmployee: (e: React.MouseEvent<HTMLDivElement>, tableCnt: number, minArrageCnt: number): void =>
     {
       e.preventDefault();
-      validateArrange();  // employ > 1, table > 2, min > 1, employ > table
-      arrangeEmployee();
+      // validateArrange();  // employ > 1, table > 2, min > 1, employ > table
+      const arragedCntList = arrangeEmployee(states.employeeList, tableCnt, minArrageCnt);
+
+      setArrangedEmployList(arrangeEmploy(states.employeeList, arragedCntList))
     },
   };
 

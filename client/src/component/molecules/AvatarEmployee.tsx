@@ -29,16 +29,18 @@ const DeleteImg = styled.img`
 
 interface Props {
   employee: Employee;
-  onClickDelete: (e: React.MouseEvent<HTMLDivElement>) => void;
+  onClickDelete?: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 const AvatarEmployee: React.FC<Props> = (props) => {
   return (
     <Container>
       <Image src={`${process.env.PUBLIC_URL}/assets/icons/person/Person-64.png`}/>
       <Name>{props.employee.name}</Name>
-      <DeleteImgWrap onClick={props.onClickDelete}>
-        <DeleteImg src={`${process.env.PUBLIC_URL}/assets/icons/delete/Delete-256.png`}/>
-      </DeleteImgWrap>
+      {!!props.onClickDelete &&
+        <DeleteImgWrap onClick={props.onClickDelete}>
+          <DeleteImg src={`${process.env.PUBLIC_URL}/assets/icons/delete/Delete-256.png`}/>
+        </DeleteImgWrap>
+      }
     </Container>
   );
 };

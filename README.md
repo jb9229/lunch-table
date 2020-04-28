@@ -4,3 +4,4 @@
   -> 실 프로젝트에서 repository 따로 관리
 2. [환경] babel(es6), typescript 환경 구축
 3. [] redux-tools, 
+4. lint 문제 해결
