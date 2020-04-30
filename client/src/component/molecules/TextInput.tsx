@@ -13,14 +13,18 @@ const handleChange = (e: React.ChangeEvent<HTMLInputElement>, setText: (text: st
 };
 
 interface InputProps {
+  placeholder?: string;
   onChange: (text: string) => void;
 }
 const TextInput:React.FC<InputProps> = (props) => {
   const [text, setText] = React.useState<string>('');
 
-  return (<Input value={text} onChange={(e) => {
-    handleChange(e, setText); props.onChange(e.target.value);
-  } } />);
+  return (
+    <Input
+      value={text}
+      placeholder={props.placeholder || undefined}
+      onChange={(e) => { handleChange(e, setText); props.onChange(e.target.value);} }
+    />);
 };
 
 export default TextInput;

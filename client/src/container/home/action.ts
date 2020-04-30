@@ -1,4 +1,5 @@
 import { Employee } from "./types";
+import { RestaurantCondition } from "./HomeProvider";
 
 /**
  * 직원 출근 등록
@@ -43,26 +44,24 @@ export const deleteEmployee = (deleteName: string, employeeList: Array<Employee>
  */
 export const arrangeEmployee = (employeeList: Array<Employee>, tableCount: number, minArrageCnt: number): Array<number> => {
   const totalEmployeeCnt = employeeList.length;
-  const arrangedEmployeeList: Array<number> = employeeList.map((employee, index, list) =>
+  const resultList = new Array<number>();
+  new Array(tableCount).fill(0).forEach((_, index, list) =>
   {
-    if (index === list.length - 1)
+    if (index === list.length - 1)  // 마지막 
     {
-      return arrangeAtLastTable(arrangedEmployeeList, totalEmployeeCnt);
+      resultList.push(arrangeAtLastTable(resultList, totalEmployeeCnt));
     } else
     {
-      if (index === 0)
-      {
-        return arrangeAtTable(list.length - tableCount, minArrageCnt);
-      } else
-      {
-        const sumArrangeCnt = arrangedEmployeeList.reduce((acc, ele) => acc + ele);
+        const sumArrangeCnt = resultList.length > 0 ? resultList.reduce((acc, ele) => acc + ele) : 0;
+        const maxArrangableCnt = employeeList.length - (sumArrangeCnt + tableCount) + 1;
 
-        return arrangeAtTable(list.length - (sumArrangeCnt + tableCount), minArrageCnt);
-      }
+        if (maxArrangableCnt < 2) { resultList.push(1); return }
+      
+        resultList.push(arrangeAtTable(maxArrangableCnt, minArrageCnt));
     }
   });
 
-  return arrangedEmployeeList;
+  return resultList;
 }
 
 /**
@@ -73,7 +72,7 @@ export const arrangeEmployee = (employeeList: Array<Employee>, tableCount: numbe
  * @returns 마지막 테이블 직원수
  */
 export const arrangeAtLastTable = (arrangedEmployeeList: Array<number>, totalEmployeeCnt: number) => {
-  const arrangedEmployeeCnt = arrangedEmployeeList.reduce((accum, eCnt) => accum + eCnt);
+  const arrangedEmployeeCnt = arrangedEmployeeList ? arrangedEmployeeList.reduce((accum, eCnt) => accum + eCnt) : 0;
   return totalEmployeeCnt - arrangedEmployeeCnt;
 }
 
@@ -103,4 +102,18 @@ export const arrangeEmploy = (employeeList: Array<Employee>, arragedCntList: Arr
 
     return list;
   })
+}
+
+/**
+ * 레스토랑 자리배치를 위한 조건값 유효성확인
+ *
+ * @param condition 레스토랑 자리배치 조건듣
+ */
+export const validateArrange = (condition: RestaurantCondition, employeeList: Array<Employee> | undefined) => {
+  const employeeCnt = employeeList ? employeeList.length : 0;
+  const tableCnt = condition?.tableCnt ? condition.tableCnt : 0;
+  if (!condition || tableCnt < 2) { alert('테이블수가 유효하지 않습니다\n(2개이상)'); return false }
+  if (condition.minArrangeCntAtTable < 1 || condition.minArrangeCntAtTable * tableCnt > employeeCnt) { alert('테이블당 최소인원이 유효하지 않습니다\n(1명이상)'); return false }
+  if (!employeeList || employeeCnt < 2 || tableCnt > employeeCnt ) { alert('직원리스트가 유효하지 않습니다\n(2명이상, 테이블수보다 커야함)'); return false }
+  return true;
 }

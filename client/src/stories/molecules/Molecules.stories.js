@@ -16,9 +16,9 @@ storiesOf('Molecules', module)
   .add('직원', () =>
     React.createElement(() =>
     {
-      const [employee] = React.useState(new Employee('Jinbeom Jeong'));
+      const [employee] = React.useState(new Employee('Jinbeom Jeong long name'));
       return (
-        <div style={{flex: 1, backgroundColor: 'lightGray', justifyContent: 'space-around'}}>
+        <div style={{display: 'flex', backgroundColor: 'lightGray', justifyContent: 'space-around'}}>
           <AvatarEmployee employee={employee} />
           <AvatarEmployee employee={employee} onClickDelete={() => alert('delete action~~')} />
         </div>

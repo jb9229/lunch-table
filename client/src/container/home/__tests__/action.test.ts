@@ -46,7 +46,6 @@ test('arrangeAtTable Action', () =>
   console.log('>>> randomValue: ', randomValue)
   expect(randomValue).toBeGreaterThanOrEqual(minArrageCnt);
   expect(randomValue).toBeLessThanOrEqual(maxArrangeCnt);
-
 });
 
 

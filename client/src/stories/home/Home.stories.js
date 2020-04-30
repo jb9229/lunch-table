@@ -4,7 +4,7 @@ import HomeLayout from '../../component/layout/HomeLayout';
 import HomeSBProvider from './HomeSBProvider';
 import { storiesOf } from '@storybook/react';
 
-storiesOf('etc...', module)
+storiesOf('Screen', module)
   .add('homeLayout', () =>
     React.createElement(() =>
     {

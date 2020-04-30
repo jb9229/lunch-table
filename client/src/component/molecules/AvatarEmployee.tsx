@@ -4,23 +4,27 @@ import { Employee } from '../../container/home/types';
 import styled from 'styled-components';
 
 const Container = styled.div`
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: blue;
+  width: 120px;
   height: 100px;
+  position: relative;
 `;
-const Name = styled.span``;
+const Name = styled.div`
+  width:100px;
+  display: block;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+`;
 const Image = styled.img``;
 const DeleteImgWrap = styled.div`
-  width: 100%;
-  height: 500;
-  display: block;
-  position: relative;
-  top: 0;
-  left: 0;
+  position: absolute;
   z-index: 999;
-  background-color: red;
+  top: 1px;
+  right: 1px;
   cursor: pointer;
 `;
 const DeleteImg = styled.img`
@@ -34,13 +38,13 @@ interface Props {
 const AvatarEmployee: React.FC<Props> = (props) => {
   return (
     <Container>
-      <Image src={`${process.env.PUBLIC_URL}/assets/icons/person/Person-64.png`}/>
-      <Name>{props.employee.name}</Name>
       {!!props.onClickDelete &&
         <DeleteImgWrap onClick={props.onClickDelete}>
           <DeleteImg src={`${process.env.PUBLIC_URL}/assets/icons/delete/Delete-256.png`}/>
         </DeleteImgWrap>
       }
+      <Image src={`${process.env.PUBLIC_URL}/assets/icons/person/Person-64.png`}/>
+      <Name>{props.employee.name}</Name>
     </Container>
   );
 };
