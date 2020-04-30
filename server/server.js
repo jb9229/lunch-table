@@ -19,6 +19,7 @@ const typeDefs = gql`
   }
   type Mutation {
     addEmployee(eName: String!): Employee
+    deleteEmployee(id: String!): Int
   }
 `;
 
@@ -33,6 +34,11 @@ const resolvers = {
     addEmployee: async(_, args) => {
       const newEmployee = new EmployeeSchema({name: args.eName})
       return await newEmployee.save();
+    },
+    deleteEmployee: async(_, args) => {
+      const res = await EmployeeSchema.deleteOne({_id: args.id});
+
+      return res.deletedCount;
     }
   }
 };
