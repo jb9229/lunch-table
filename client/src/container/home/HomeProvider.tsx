@@ -22,7 +22,7 @@ interface Props {
 
 const HomeProvider = (props: Props): React.ReactElement => {
   // State valiables
-  const [newEmployee, setNewEmployee] = React.useState<Employee>(new Employee(''));
+  const [newEmployee] = React.useState<Employee>(new Employee(''));
   const [arrangedEmployeeList, setArrangedEmployeeList] = React.useState<Array<Array<Employee>> | undefined>(undefined);
   const [restaurantCondition] = React.useState(new RestaurantCondition())
   

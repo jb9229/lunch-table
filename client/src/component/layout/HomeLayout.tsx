@@ -26,9 +26,7 @@ const CommandRightWrap = styled.div`
 `;
 const EmployeeListWrap = styled.div`
   display: flex;
-  justify-content: center;
   overflow: auto;
-  white-space: nowrap;
 `;
 const SeperatorLine = styled.div`
   width: 100%;

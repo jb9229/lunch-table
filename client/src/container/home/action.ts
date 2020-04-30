@@ -14,9 +14,11 @@ export const addEmployee = (newEmployee: Employee, employeeList: Array<Employee>
   if (!newEmployee.name) {return employeeList;}
 
   // Duplicate Validation
-  const existEmployee = employeeList.some((employ) =>
+  const existEmployee = employeeList.some((employ): boolean =>
   {
     if (employ.name === newEmployee.name) {return true;}
+
+    return false;
   });
 
   if (existEmployee) {return employeeList;}
@@ -53,10 +55,10 @@ export const arrangeEmployee = (employeeList: Array<Employee>, tableCount: numbe
     } else
     {
         const sumArrangeCnt = resultList.length > 0 ? resultList.reduce((acc, ele) => acc + ele) : 0;
-        const maxArrangableCnt = employeeList.length - (sumArrangeCnt + tableCount) + 1;
+        const maxArrangableCnt = employeeList.length - (sumArrangeCnt + ((tableCount - 1) * minArrageCnt));
 
-        if (maxArrangableCnt < 2) { resultList.push(1); return }
-      
+        if (maxArrangableCnt <= minArrageCnt) { resultList.push(minArrageCnt); return }
+
         resultList.push(arrangeAtTable(maxArrangableCnt, minArrageCnt));
     }
   });
